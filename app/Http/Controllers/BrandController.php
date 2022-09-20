@@ -29,6 +29,28 @@ class BrandController extends Controller
         return Redirect::route("brand.index");
     }
 
+    public function edit(Brand $brand): Response
+    {
+        $brands = Brand::all();
+        return Inertia::render('Brand/Edit', compact('brand', 'brands'));
+    }
+
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function update(Brand $brand, Request $request): RedirectResponse
+    {
+        $validated = $this->validate($request, [
+            'name' => 'required'
+        ]);
+
+        $brand->fill($validated);
+
+        $brand->save();
+
+        return Redirect::route("brand.index");
+    }
+
     public function destroy(Brand $brand): RedirectResponse
     {
         $brand->delete();

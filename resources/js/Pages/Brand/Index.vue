@@ -11,6 +11,10 @@
                     {{brand.name}}
                 </td>
                 <td>
+                    <Link :href="route('brand.edit', brand.id)"
+                          class="text-sm text-gray-700 dark:text-gray-500 underline">
+                        Edit
+                    </Link>
                     <Link method="DELETE" type="button" as="button" :href="route('brand.destroy', brand.id)">
                         Delete
                     </Link>

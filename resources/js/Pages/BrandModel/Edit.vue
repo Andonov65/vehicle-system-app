@@ -1,33 +1,9 @@
 <template>
     <Head title="Brand Model"/>
     <div>
-        <table>
-            <tr>
-                <th>Brand Model Name</th>
-                <th>Brand Name</th>
-                <th></th>
-            </tr>
-            <tr v-for="brandmodel in brandmodels" :key="brandmodel.id">
-                <td>
-                    {{ brandmodel.name }}
-                </td>
-                <td>
-                    {{ brandmodel.brand.name }}
-                </td>
-                <td>
-                    <Link :href="route('brandmodel.edit', brandmodel.id)"
-                          class="text-sm text-gray-700 dark:text-gray-500 underline">
-                        Edit
-                    </Link>
-                    <Link method="DELETE" type="button" as="button" :href="route('brandmodel.destroy', brandmodel.id)">
-                        Delete
-                    </Link>
-                </td>
-            </tr>
-        </table>
         <form @submit.prevent="submit">
             <div>
-                <label for="name">Brand Name</label>
+                <label for="name">Brand Model Name</label>
                 <input
                     name="name"
                     id="name"
@@ -60,17 +36,17 @@ import {useForm} from "@inertiajs/inertia-vue3";
 export default {
     name: 'BrandModel',
     props: {
-        brandmodels: Array,
+        brandmodel: Object,
         brands: Array
     },
-    setup() {
+    setup(props) {
         const form = useForm({
-            brand_id: null,
-            name: null
+            brand_id: props.brandmodel.brand_id,
+            name: props.brandmodel.name
         });
 
         const submit = () => {
-            form.post(route("brandmodel.store"));
+            form.put(route("brandmodel.update", props.brandmodel));
         }
 
         return {form, submit};

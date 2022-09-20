@@ -19,9 +19,11 @@ class VehicleController extends Controller
 {
     public function index(): Response
     {
-        $vehicles = Vehicle::query()->paginate();
+           $vehicles = Vehicle::query()->paginate();
 
-        return Inertia::render('Vehicle/Index', compact('vehicles'));
+//         $cars = Brand::query()->with('vehicles')->get();
+
+          return Inertia::render('Vehicle/Index', compact('vehicles'));
     }
 
     public function create(): Response
