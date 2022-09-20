@@ -8,12 +8,21 @@
                         <div>
                             <label for="brand_model_id">Vehicle Brand Model</label>
                             <select
+                                type="text">
+                                <option>
+                                    {{ brand.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="brand_model_id">Vehicle Brand Model</label>
+                            <select
                                 name="brand_model_id"
                                 id="brand_model_id"
                                 type="text"
                                 v-model="form.brand_model_id">
                                 <option v-for="brand_model in brand_models" :value="brand_model.id">
-                                    {{brand_model.name}}
+                                    {{ brand_model.name }}
                                 </option>
                             </select>
                         </div>
@@ -70,6 +79,7 @@ export default {
     props: {
         brand_models: Array,
         vehicle: Object,
+        brand: Object,
     },
     setup(props) {
         const form = useForm({
@@ -80,7 +90,6 @@ export default {
             details: props.vehicle.details,
             image: null,
         });
-
 
         const submit = ()=>
         {

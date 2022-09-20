@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\BrandModelController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +39,5 @@ Route::middleware([
 
 
 Route::resource('/vehicle', VehicleController::class);
+Route::resource('/brand', BrandController::class);
+Route::resource('/brandmodel', BrandModelController::class);

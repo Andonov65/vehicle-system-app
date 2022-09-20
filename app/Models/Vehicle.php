@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -32,10 +33,5 @@ class Vehicle extends Model
     public function brandmodel(): BelongsTo
     {
         return $this->belongsTo(BrandModel::class);
-    }
-
-    public function brand()
-    {
-        return $this->hasOneThrough(Brand::class, BrandModel::class);
     }
 }

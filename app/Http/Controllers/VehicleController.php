@@ -7,6 +7,7 @@ use App\Models\BrandModel;
 use App\Models\Vehicle;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
@@ -25,7 +26,8 @@ class VehicleController extends Controller
 
     public function create(): Response
     {
-        $brand_models = BrandModel::all();
+        $brand_models = Brand::query()->with('brandmodels')->get();
+
         return Inertia::render('Vehicle/Create', compact('brand_models'));
     }
 
@@ -64,8 +66,11 @@ class VehicleController extends Controller
 
     public function edit(Vehicle $vehicle): Response
     {
-        $brand_models = BrandModel::all();
-        return Inertia::render('Vehicle/Edit', compact('vehicle', 'brand_models'));
+        $brand_finding = BrandModel::query()->where('id','=',  $vehicle->brand_model_id)->get();
+        $brand_models = Brand::query()->find($brand_finding[0]->brand_id)->brandmodels;
+        $brand = Brand::query()->find($brand_models[0]->brand_id);
+
+        return Inertia::render('Vehicle/Edit', compact('vehicle', 'brand_models', 'brand'));
     }
 
     /**

@@ -8,12 +8,22 @@
                         <div>
                             <label for="brand_model_id">Vehicle Brand Model</label>
                             <select
+                                v-model="brand_selected.brand_models"
+                                type="text">
+                                <option v-for="brand in brand_models" :value="brand.brandmodels">
+                                    {{ brand.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="brand_model_id">Vehicle Brand Model</label>
+                            <select
                                 name="brand_model_id"
                                 id="brand_model_id"
                                 type="text"
                                 v-model="form.brand_model_id">
-                                <option v-for="brand_model in brand_models" :value="brand_model.id">
-                                    {{brand_model.name}}
+                                <option v-for="brand_model in brand_selected.brand_models" :value="brand_model.id">
+                                    {{ brand_model.name }}
                                 </option>
                             </select>
                         </div>
@@ -70,6 +80,11 @@ export default {
     props: {
         brand_models: Array
     },
+    data() {
+        return {
+            brand_selected: '',
+        }
+    },
     setup() {
         const form = useForm({
             brand_model_id: null,
@@ -79,19 +94,22 @@ export default {
             image: null,
         });
 
+        const brand_selected = useForm({
+           brand_models: '',
+        });
 
-        const submit = ()=>
-        {
+
+        const submit = () => {
             form.post(route("vehicle.store"));
         }
 
-        const handleChange = (e) =>{
+        const handleChange = (e) => {
             const file = e.target.files[0];
-            if(!file) return;
+            if (!file) return;
             form.image = file;
         }
 
-        return {form, submit, handleChange};
+        return {form, submit, handleChange, brand_selected};
     }
 };
 </script>
