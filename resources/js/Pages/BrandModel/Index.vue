@@ -50,7 +50,7 @@ import {Head, Link} from "@inertiajs/inertia-vue3";
 import {useForm} from "@inertiajs/inertia-vue3";
 
 export default {
-    name: 'Brand',
+    name: 'BrandModel',
     props: {
         brandmodels: Array,
         brands: Array
