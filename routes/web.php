@@ -38,6 +38,6 @@ Route::middleware([
 });
 
 
-Route::resource('/vehicle', VehicleController::class);
-Route::resource('/brand', BrandController::class);
-Route::resource('/brandmodel', BrandModelController::class);
+Route::resource('/vehicles', VehicleController::class);
+Route::resource('/brands', BrandController::class);
+Route::resource('/brandmodels', BrandModelController::class);

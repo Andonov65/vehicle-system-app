@@ -33,7 +33,7 @@ export default {
         });
 
         const submit = () => {
-            form.put(route("brand.update", props.brand));
+            form.put(route("brands.update", props.brand));
         }
 
         return {form, submit};

@@ -33,7 +33,7 @@ class BrandModelController extends Controller
 
         BrandModel::query()->create($validated);
 
-        return Redirect::route("brandmodel.index");
+        return Redirect::route("brandmodels.index");
     }
 
     public function edit(BrandModel $brandmodel): Response
@@ -56,13 +56,13 @@ class BrandModelController extends Controller
 
         $brandmodel->save();
 
-        return Redirect::route("brandmodel.index");
+        return Redirect::route("brandmodels.index");
     }
 
     public function destroy(BrandModel $brandmodel): RedirectResponse
     {
         $brandmodel->delete();
 
-        return Redirect::route("brandmodel.index");
+        return Redirect::route("brandmodels.index");
     }
 }

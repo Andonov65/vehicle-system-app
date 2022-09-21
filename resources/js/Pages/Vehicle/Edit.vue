@@ -93,7 +93,7 @@ export default {
 
         const submit = ()=>
         {
-            form.post(route("vehicle.update", props.vehicle));
+            form.post(route("vehicles.update", props.vehicle));
         }
 
         const handleChange = (e) =>{

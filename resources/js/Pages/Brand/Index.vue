@@ -11,11 +11,11 @@
                     {{brand.name}}
                 </td>
                 <td>
-                    <Link :href="route('brand.edit', brand.id)"
+                    <Link :href="route('brands.edit', brand.id)"
                           class="text-sm text-gray-700 dark:text-gray-500 underline">
                         Edit
                     </Link>
-                    <Link method="DELETE" type="button" as="button" :href="route('brand.destroy', brand.id)">
+                    <Link method="DELETE" type="button" as="button" :href="route('brands.destroy', brand.id)">
                         Delete
                     </Link>
                 </td>
@@ -54,7 +54,11 @@ export default {
 
         const submit = ()=>
         {
-            form.post(route("brand.store"));
+            form.post(route("brands.store"),{
+                onSuccess: () => {
+                    form.name = ''
+                }
+            });
         }
 
         return {form, submit};

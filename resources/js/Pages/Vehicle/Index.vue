@@ -1,7 +1,7 @@
 <template>
     <Head title="Product"/>
     <div>
-        <Link :href="route('vehicle.create')" class="text-sm text-gray-700 dark:text-gray-500 underline">
+        <Link :href="route('vehicles.create')" class="text-sm text-gray-700 dark:text-gray-500 underline">
             Create New Vehicle
         </Link>
     </div>
@@ -38,11 +38,11 @@
                     <img v-if="vehicle.image.charAt(0) !== 'd' " :src="'http://127.0.0.1:8000/storage/'+vehicle.image"/>
                 </td>
                 <td class="table-cell border-4">
-                    <Link :href="route('vehicle.edit', vehicle.id)"
+                    <Link :href="route('vehicles.edit', vehicle.id)"
                           class="text-sm text-gray-700 dark:text-gray-500 underline">
                         Edit
                     </Link>
-                    <Link method="DELETE" type="button" as="button" :href="route('vehicle.destroy', vehicle.id)">
+                    <Link method="DELETE" type="button" as="button" :href="route('vehicles.destroy', vehicle.id)">
                         Delete
                     </Link>
                 </td>

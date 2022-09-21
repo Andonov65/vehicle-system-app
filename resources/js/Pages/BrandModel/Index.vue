@@ -15,11 +15,11 @@
                     {{ brandmodel.brand.name }}
                 </td>
                 <td>
-                    <Link :href="route('brandmodel.edit', brandmodel.id)"
+                    <Link :href="route('brandmodels.edit', brandmodel.id)"
                           class="text-sm text-gray-700 dark:text-gray-500 underline">
                         Edit
                     </Link>
-                    <Link method="DELETE" type="button" as="button" :href="route('brandmodel.destroy', brandmodel.id)">
+                    <Link method="DELETE" type="button" as="button" :href="route('brandmodels.destroy', brandmodel.id)">
                         Delete
                     </Link>
                 </td>
@@ -70,7 +70,11 @@ export default {
         });
 
         const submit = () => {
-            form.post(route("brandmodel.store"));
+            form.post(route("brandmodels.store"),{
+                onSuccess: () => {
+                    form.reset();
+                }
+            });
         }
 
         return {form, submit};

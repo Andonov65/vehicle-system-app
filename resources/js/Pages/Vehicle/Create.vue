@@ -100,7 +100,7 @@ export default {
 
 
         const submit = () => {
-            form.post(route("vehicle.store"));
+            form.post(route("vehicles.store"));
         }
 
         const handleChange = (e) => {

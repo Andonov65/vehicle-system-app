@@ -26,7 +26,7 @@ class BrandController extends Controller
 
         Brand::query()->create($validated);
 
-        return Redirect::route("brand.index");
+        return Redirect::route("brands.index");
     }
 
     public function edit(Brand $brand): Response
@@ -48,13 +48,13 @@ class BrandController extends Controller
 
         $brand->save();
 
-        return Redirect::route("brand.index");
+        return Redirect::route("brands.index");
     }
 
     public function destroy(Brand $brand): RedirectResponse
     {
         $brand->delete();
 
-        return Redirect::route("brand.index");
+        return Redirect::route("brands.index");
     }
 }

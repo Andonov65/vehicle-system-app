@@ -23,7 +23,7 @@
                 </select>
             </div>
             <button type="submit">
-                Add
+                Save
             </button>
         </form>
     </div>
@@ -46,7 +46,7 @@ export default {
         });
 
         const submit = () => {
-            form.put(route("brandmodel.update", props.brandmodel));
+            form.put(route("brandmodels.update", props.brandmodel));
         }
 
         return {form, submit};

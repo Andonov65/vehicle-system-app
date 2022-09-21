@@ -63,7 +63,7 @@ class VehicleController extends Controller
 
         $vehicle->save();
 
-        return Redirect::route("vehicle.index");
+        return Redirect::route("vehicles.index");
     }
 
     public function edit(Vehicle $vehicle): Response
@@ -102,12 +102,12 @@ class VehicleController extends Controller
         $vehicle->fill($validated);
         $vehicle->save();
 
-        return Redirect::route("vehicle.index");
+        return Redirect::route("vehicles.index");
     }
 
     public function destroy(Vehicle $vehicle): RedirectResponse
     {
         $vehicle->delete();
-        return Redirect::route("vehicle.index");
+        return Redirect::route("vehicles.index");
     }
 }
