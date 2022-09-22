@@ -19,11 +19,9 @@ class VehicleController extends Controller
 {
     public function index(): Response
     {
-           $vehicles = Vehicle::query()->paginate();
+        $vehicles = Vehicle::query()->with('brand_model', 'brand_model.brand')->get();
 
-//         $cars = Brand::query()->with('vehicles')->get();
-
-          return Inertia::render('Vehicle/Index', compact('vehicles'));
+        return Inertia::render('Vehicle/Index', compact('vehicles'));
     }
 
     public function create(): Response
@@ -68,9 +66,11 @@ class VehicleController extends Controller
 
     public function edit(Vehicle $vehicle): Response
     {
-        $brand_finding = BrandModel::query()->where('id','=',  $vehicle->brand_model_id)->get();
+        $brand_finding = BrandModel::query()->where('id', '=', $vehicle->brand_model_id)->get();
         $brand_models = Brand::query()->find($brand_finding[0]->brand_id)->brandmodels;
         $brand = Brand::query()->find($brand_models[0]->brand_id);
+
+//        $vehicle = Vehicle::query()->find($vehicle)->last()->loadMissing('brand_model', 'brand_model.brand');
 
         return Inertia::render('Vehicle/Edit', compact('vehicle', 'brand_models', 'brand'));
     }

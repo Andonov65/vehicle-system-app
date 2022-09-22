@@ -9,21 +9,33 @@
         <table class="table border-4 text-center">
             <tr class="table-row text-center">
                 <th class=" border-4 columns-3">
-                    Vehicle Chassis Number
+                    Brand
                 </th>
                 <th class=" border-4 columns-3">
-                    Vehicle Title
+                    Brand Model
                 </th>
                 <th class=" border-4 columns-3">
-                    Vehicle Details
+                    Chassis Number
                 </th>
                 <th class=" border-4 columns-3">
-                    Vehicle Image
+                    Title
+                </th>
+                <th class=" border-4 columns-3">
+                    Details
+                </th>
+                <th class=" border-4 columns-3">
+                    Image
                 </th>
                 <th class=" border-4 columns-3">
                 </th>
             </tr>
-            <tr v-for="vehicle in vehicles.data" :key="vehicle.id" class="table-row">
+            <tr v-for="vehicle in vehicles" :key="vehicle.id" class="table-row">
+                <td class="table-cell border-4">
+                    {{ vehicle.brand_model.brand.name }}
+                </td>
+                <td class="table-cell border-4">
+                    {{ vehicle.brand_model.name }}
+                </td>
                 <td class="table-cell border-4">
                     {{ vehicle.chassis_number }}
                 </td>
