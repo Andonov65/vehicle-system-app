@@ -6,13 +6,8 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form @submit.prevent="submit">
                         <div>
-                            <label for="brand_model_id">Vehicle Brand Model</label>
-                            <select
-                                type="text">
-                                <option>
-                                    {{ brand.name }}
-                                </option>
-                            </select>
+                            <label for="brand_model_id">Vehicle Brand</label>
+                            <input :value="brand.name" style="color: gray" type="text" disabled>
                         </div>
                         <div>
                             <label for="brand_model_id">Vehicle Brand Model</label>
