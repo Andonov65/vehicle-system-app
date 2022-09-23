@@ -10,7 +10,7 @@
                             <select
                                 v-model="brand_selected.brand_models"
                                 type="text">
-                                <option v-for="brand in brand_models" :value="brand.brandmodels">
+                                <option v-for="brand in brand_models" :value="brand.brand_models">
                                     {{ brand.name }}
                                 </option>
                             </select>

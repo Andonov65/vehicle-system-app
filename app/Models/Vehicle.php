@@ -30,7 +30,7 @@ class Vehicle extends Model
         });
     }
 
-    public function brand_model(): BelongsTo
+    public function brandModel(): BelongsTo
     {
         return $this->belongsTo(BrandModel::class);
     }

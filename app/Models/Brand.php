@@ -13,7 +13,7 @@ class Brand extends Model
 
     protected $fillable = ['name'];
 
-    public function brandmodels(): HasMany
+    public function brandModels(): HasMany
     {
         return $this->hasMany(BrandModel::class);
     }

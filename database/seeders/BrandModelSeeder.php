@@ -16,7 +16,7 @@ class BrandModelSeeder extends Seeder
     public function run()
     {
         $brand1 = Brand::query()->find(1);
-        $brand1->brandmodels()->createMany([
+        $brand1->brandModels()->createMany([
             [
                 'name' => 'Brand Model 1',
             ],
@@ -29,7 +29,7 @@ class BrandModelSeeder extends Seeder
         ]);
 
         $brand2 = Brand::query()->find(2);
-        $brand2->brandmodels()->createMany([
+        $brand2->brandModels()->createMany([
             [
                 'name' => 'Brand Model 4',
             ],
@@ -39,7 +39,7 @@ class BrandModelSeeder extends Seeder
         ]);
 
         $brand3 = Brand::query()->find(3);
-        $brand3->brandmodels()->create([
+        $brand3->brandModels()->create([
            'name' => 'Brand Model 6'
         ]);
 

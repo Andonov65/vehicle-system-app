@@ -19,14 +19,14 @@ class VehicleController extends Controller
 {
     public function index(): Response
     {
-        $vehicles = Vehicle::query()->with('brand_model', 'brand_model.brand')->get();
+        $vehicles = Vehicle::query()->with('brandModel', 'brandModel.brand')->get();
 
         return Inertia::render('Vehicle/Index', compact('vehicles'));
     }
 
     public function create(): Response
     {
-        $brand_models = Brand::query()->with('brandmodels')->get();
+        $brand_models = Brand::query()->with('brandModels')->get();
 
         return Inertia::render('Vehicle/Create', compact('brand_models'));
     }
@@ -36,7 +36,7 @@ class VehicleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $this->validate($request, [
+        $validated = $this->validate($request, [
             'brand_model_id' => 'required',
             'chassis_number' => 'required',
             'title' => 'required',
@@ -44,11 +44,10 @@ class VehicleController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,svg,webp'
         ]);
 
-        $vehicle = new Vehicle();
-        $vehicle->brand_model_id = $request->input('brand_model_id');
-        $vehicle->chassis_number = $request->input('chassis_number');
-        $vehicle->title = $request->input('title');
-        $vehicle->details = $request->input('details');
+        unset($validated['image']);
+
+        $vehicle = new Vehicle($validated);
+
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -59,7 +58,12 @@ class VehicleController extends Controller
             $vehicle->image = $filename;
         }
 
-        $vehicle->save();
+        BrandModel::query()->find($validated['brand_model_id'])->vehicles()->create([
+            'chassis_number' => $vehicle->chassis_number,
+            'title' => $vehicle->title,
+            'details' => $vehicle->details,
+            'image' => $vehicle->image
+        ]);
 
         return Redirect::route("vehicles.index");
     }
@@ -87,6 +91,8 @@ class VehicleController extends Controller
             'details' => 'required',
             'image' => 'nullable|exclude_if:image,null|image|mimes:jpeg,png,jpg,svg,webp'
         ]);
+        $brandModel = $validated['brand_model_id'];
+        unset($validated['brand_model_id']);
 
         if ($request->hasFile('image')) {
 
@@ -100,6 +106,8 @@ class VehicleController extends Controller
             $validated['image'] = $filename;
         }
         $vehicle->fill($validated);
+        $vehicle->brandModel()->associate($brandModel);
+
         $vehicle->save();
 
         return Redirect::route("vehicles.index");
